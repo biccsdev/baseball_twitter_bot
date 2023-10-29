@@ -1,0 +1,24 @@
+{
+  "name": "baseball_twitter_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scrape.js",
+  "type": "module",
+  "scripts": {
+    "scrape": "node scrape.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biccsdev/baseball_twitter_bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biccsdev/baseball_twitter_bot/issues"
+  },
+  "homepage": "https://github.com/biccsdev/baseball_twitter_bot#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
