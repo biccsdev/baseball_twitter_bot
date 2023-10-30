@@ -2,7 +2,7 @@ import https from "https";
 
 const url = 'https://cañeros.net'; // URL of the webpage to scrape
 
-async function getData() {
+export async function getData() {
   return new Promise((resolve, reject) => {
     https.get(url, (response) => {
       let data = '';
@@ -27,24 +27,24 @@ async function getData() {
 }
 
 // Call the getData function and use the data from another file or function
-getData()
-  .then((data) => {
-    const { status, scoreVisitor, scoreHome } = data;
+// getData()
+//   .then((data) => {
+//     const { status, scoreVisitor, scoreHome } = data;
 
-    console.log(status);
-    console.log(scoreVisitor);
-    console.log(scoreHome);
+//     console.log(status);
+//     console.log(scoreVisitor);
+//     console.log(scoreHome);
 
-    if (status == 'FINALIZADO') {
-      if (scoreVisitor < scoreHome) {
-        console.log('SI');
-      } else {
-        console.log('NO');
-      }
-    } else {
-      console.log('El juego no ha terminado')
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+//     if (status == 'FINALIZADO') {
+//       if (scoreVisitor < scoreHome) {
+//         console.log('SI');
+//       } else {
+//         console.log('NO');
+//       }
+//     } else {
+//       console.log('El juego no ha terminado')
+//     }
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
