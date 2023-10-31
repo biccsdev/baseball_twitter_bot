@@ -10,15 +10,17 @@ cron.schedule('*/5 * * * *', () => {
             if (status == 'FINALIZADO') {
                 if (scoreVisitor < scoreHome) {
                     try {
-                        const response = await twitterClient.v2.tweet('SI');
+                        const response = await twitterClient.v2.tweet('Si');
                         console.log('Tweet sent successfully:', response);
+                        process.exit(0);
                     } catch (error) {
                         console.error('Failed to tweet:', error);
                     }
                 } else {
                     try {
-                        const response = await twitterClient.v2.tweet('NO');
+                        const response = await twitterClient.v2.tweet('No');
                         console.log('Tweet sent successfully:', response);
+                        process.exit(0);
                     } catch (error) {
                         console.error('Failed to tweet:', error);
                     }

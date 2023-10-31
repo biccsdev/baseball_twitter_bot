@@ -9,10 +9,3 @@ export const twitterClient = new TwitterApi({
     accessToken: process.env.ACCESSTOKEN,
     accessSecret: process.env.ACCESSSECRET,
 });
-
-// try {
-//     const response = await twitterClient.v2.tweet('Hello, this is a test.');
-//     console.log('Tweet sent successfully:', response);
-// } catch (error) {
-//     console.error('Failed to tweet:', error);
-// }
