@@ -28,6 +28,8 @@ export async function getData() {
           console.log('Home is winning');
         } else if (scoreVisitor > scoreHome) {
           console.log('Visitors are winning');
+        } else {
+          console.log('Game is tied');
         }
 
         resolve({ status, scoreVisitor, scoreHome });
