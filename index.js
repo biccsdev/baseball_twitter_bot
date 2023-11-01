@@ -1,7 +1,8 @@
 import { getData } from "./scrape.js";
 import { twitterClient } from "./twitterConfig.js";
 import cron from 'node-cron';
-
+// '*/10 * * * * *'
+// '*/5 * * * *'
 cron.schedule('*/5 * * * *', () => {
     getData()
         .then(async (data) => {
@@ -26,7 +27,8 @@ cron.schedule('*/5 * * * *', () => {
                     }
                 }
             } else {
-                console.log('El juego no ha terminado')
+                console.log('Game is not done yet.')
+                console.log('-------------------------------')
             }
         })
         .catch((error) => {
