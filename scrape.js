@@ -16,21 +16,8 @@ export async function getData() {
         const $ = cheerio.load(data);
 
         const status = $('.tablero th').first().text().trim();
-        console.log("Status:", status);
-
         const scoreVisitor = $(".car").eq(0).text().trim();
-        console.log("Score Visitor:", scoreVisitor);
-
         const scoreHome = $(".car").eq(1).text().trim();
-        console.log("Score Home:", scoreHome);
-
-        if (scoreVisitor < scoreHome) {
-          console.log('Home is winning');
-        } else if (scoreVisitor > scoreHome) {
-          console.log('Visitors are winning');
-        } else {
-          console.log('Game is tied');
-        }
 
         resolve({ status, scoreVisitor, scoreHome });
       });
