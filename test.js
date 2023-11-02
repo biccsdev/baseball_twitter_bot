@@ -70,6 +70,10 @@ getData()
         console.log(scoreCaneros)
         console.log(tweetSent)
 
+        if (status == 'FINALIZADO') {
+            tweetSent = true;
+        }
+
         // Check if the game is over and if the tweet hasn't been sent
         if (status == 'FINALIZADO' && !tweetSent) {
 
