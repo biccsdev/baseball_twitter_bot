@@ -13,14 +13,14 @@ cron.schedule('*/10 * * * * *', () => {
     // Function that retrieves the scraped data from the baseball team website
     getData()
         .then(async (data) => {
-            const { status, scoreVisitor, scoreHome } = data;
+            const { status, scoreOtherTeam, scoreCaneros } = data;
 
             // Check if the game is over and if the tweet hasn't been sent
             if (status == 'FINALIZADO' && !tweetSent) {
 
                 // Validates the score and tweets the result
                 // depending on the outcome of the game
-                if (scoreVisitor < scoreHome) {
+                if (scoreOtherTeam < scoreCaneros) {
                     try {
                         const response = await twitterClient.v2.tweet('Si');
                         console.log('Tweet sent successfully:', response);
@@ -49,12 +49,12 @@ cron.schedule('*/10 * * * * *', () => {
                 // started and if the tweet hasn't been sent already
                 if (status != 'FINALIZADO' && !tweetSent) {
                     console.log("Status:", status);
-                    console.log("Score Visitor:", scoreVisitor);
-                    console.log("Score Home:", scoreHome);
+                    console.log("Score Visitor:", scoreOtherTeam);
+                    console.log("Score Home:", scoreCaneros);
 
-                    if (scoreVisitor < scoreHome) {
+                    if (scoreOtherTeam < scoreCaneros) {
                         console.log('Home is winning');
-                    } else if (scoreVisitor > scoreHome) {
+                    } else if (scoreOtherTeam > scoreCaneros) {
                         console.log('Visitors are winning');
                     } else {
                         console.log('Game is tied');

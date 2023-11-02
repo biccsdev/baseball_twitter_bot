@@ -16,10 +16,10 @@ export async function getData() {
         const $ = cheerio.load(data);
 
         const status = $('.tablero th').first().text().trim();
-        const scoreVisitor = $(".car").eq(0).text().trim();
-        const scoreHome = $(".car").eq(1).text().trim();
+        const scoreOtherTeam = $(".car").eq(0).text().trim();
+        const scoreCaneros = $(".car").eq(1).text().trim();
 
-        resolve({ status, scoreVisitor, scoreHome });
+        resolve({ status, scoreOtherTeam, scoreCaneros });
       });
 
       response.on('error', (error) => {
