@@ -11,7 +11,7 @@ import cron from 'node-cron';
 await readJsonFile()
 
 // Cron job that runs the program every 5 minutes
-cron.schedule('*/10 * * * * *', () => {
+cron.schedule('*/5 * * * *', () => {
 
     // Function that retrieves the scraped data from the baseball team website
     getData()
