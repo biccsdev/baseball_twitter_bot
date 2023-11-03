@@ -2,8 +2,13 @@ import https from "https";
 import * as cheerio from "cheerio";
 import { twitterClient } from "./twitterConfig.js";
 import cron from 'node-cron';
+import { promises as fs } from 'fs';
+import { readJsonFile, updateJsonFile, tweetSent } from "./helperStore.js";
 
 const url = 'https://cañeros.net'; // URL of the webpage to scrape
+await readJsonFile()
+console.log(tweetSent)
+console.log('--------------')
 
 // Scrapes data from the baseball's team website and 
 // performs HTML manipulation to retrieve the data needed
@@ -59,8 +64,39 @@ export async function getData() {
     });
 }
 
+/*
+    PENDING
+    Manage the state of tweetSent when the script is run after a game
+    is over and the tweet been sent, the variable is false an it prompt the tweet
+    but it should because it already tweeted, but the bot doesn't know that
+    because it has just been turned on
+
+
+*/
+
 // cron.schedule('*/10 * * * * *', () => {
-let tweetSent = false;
+// let tweetSent = fs.readFile('tweetState.json', 'utf8', (err, data) => {
+//     if (err) {
+//         console.log('Error reading JSON file: ', err);
+//         return;
+//     }
+
+//     try {
+//         // Parse the JSON data
+//         const config = JSON.parse(data);
+
+//         // Access the "tweetSent" parameter
+//         const tweetSent = config.tweetSent;
+
+//         console.log('tweetSent:', tweetSent);
+//         return tweetSent;
+//     } catch (error) {
+//         console.error('Error parsing JSON:', error);
+//     }
+// });
+
+
+
 // Function that retrieves the scraped data from the baseball team website
 getData()
     .then(async (data) => {
@@ -69,10 +105,6 @@ getData()
         console.log(scoreOtherTeam)
         console.log(scoreCaneros)
         console.log(tweetSent)
-
-        if (status == 'FINALIZADO') {
-            tweetSent = true;
-        }
 
         // Check if the game is over and if the tweet hasn't been sent
         if (status == 'FINALIZADO' && !tweetSent) {
@@ -83,7 +115,7 @@ getData()
                 try {
                     // const response = await twitterClient.v2.tweet('Si');
                     console.log('Tweet sent successfully:');
-                    tweetSent = true;
+                    await updateJsonFile();
                 } catch (error) {
                     console.error('Failed to tweet:', error);
                 }
@@ -91,7 +123,7 @@ getData()
                 try {
                     // const response = await twitterClient.v2.tweet('No');
                     console.log('Tweet sent successfully:');
-                    tweetSent = true;
+                    await updateJsonFile();
                 } catch (error) {
                     console.error('Failed to tweet:', error);
                 }
@@ -101,7 +133,7 @@ getData()
             // Sets the helper variable to false to start showing the current game data,
             // if the game has started and if the tweet has been sent already from the previous game
             if (status != 'FINALIZADO' && tweetSent) {
-                tweetSent = false;
+                await updateJsonFile();
             }
 
             // Prints to console the status of the game if it has already
