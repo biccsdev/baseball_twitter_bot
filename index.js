@@ -57,13 +57,13 @@ cron.schedule('*/5 * * * *', () => {
                 // started and if the tweet hasn't been sent already
                 if (status != 'FINALIZADO' && status != 'PRÓXIMO' && !tweetSent) {
                     console.log("Status:", status);
-                    console.log("Score Visitor:", scoreOtherTeam);
-                    console.log("Score Home:", scoreCaneros);
+                    console.log("Score Other team:", scoreOtherTeam);
+                    console.log("Score Cañeros:", scoreCaneros);
 
                     if (scoreOtherTeam < scoreCaneros) {
-                        console.log('Home is winning');
+                        console.log('Cañeros are winning');
                     } else if (scoreOtherTeam > scoreCaneros) {
-                        console.log('Visitors are winning');
+                        console.log('Other team is winning');
                     } else {
                         console.log('Game is tied');
                     }
